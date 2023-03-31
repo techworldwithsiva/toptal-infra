@@ -1,5 +1,5 @@
 module "ecs" {
-  source = "terraform-aws-modules/ecs/aws"
+  source       = "terraform-aws-modules/ecs/aws"
   cluster_name = local.name
   cluster_configuration = {
     execute_command_configuration = {
@@ -24,5 +24,5 @@ module "ecs" {
   }
 
   tags = local.tags
-  
+
 }

@@ -6,8 +6,8 @@ resource "aws_ecr_repository" "web_repo" {
     scan_on_push = var.scan_on_push
   }
   tags = merge(local.tags, {
-        Name  = "node-web"
-    })
+    Name = "node-web"
+  })
 }
 
 resource "aws_ecr_repository" "api_repo" {
@@ -18,6 +18,6 @@ resource "aws_ecr_repository" "api_repo" {
     scan_on_push = var.scan_on_push
   }
   tags = merge(local.tags, {
-        Name  = "node-api"
-    })
+    Name = "node-api"
+  })
 }

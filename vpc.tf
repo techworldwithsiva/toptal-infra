@@ -1,11 +1,11 @@
 module "vpc" {
-  source = "terraform-aws-modules/vpc/aws"
-  name = local.name
-  cidr = var.cidr
-  azs                 = ["${local.region}a", "${local.region}b"]
-  private_subnets     = var.private_subnets
-  public_subnets      = var.public_subnets
-  database_subnets    = var.database_subnets
+  source           = "terraform-aws-modules/vpc/aws"
+  name             = local.name
+  cidr             = var.cidr
+  azs              = ["${local.region}a", "${local.region}b"]
+  private_subnets  = var.private_subnets
+  public_subnets   = var.public_subnets
+  database_subnets = var.database_subnets
 
   create_database_subnet_group = true
 
@@ -28,15 +28,15 @@ module "vpc" {
 
   manage_default_security_group = true
   default_security_group_tags   = { Name = "${local.name}-default" }
-  default_security_group_name = "${local.name}-default"
-  database_subnet_tags = { Name = "database-subnet-${local.name}" }
+  default_security_group_name   = "${local.name}-default"
+  database_subnet_tags          = { Name = "database-subnet-${local.name}" }
   # public_subnet_tags = { Name = "public-subnet-${local.name}" }
   # private_subnet_tags = { Name = "private-subnet-${local.name}" }
 
   private_subnet_tags_per_az = {
     az1 = {
       Name = "${data.aws_availability_zones.available.names[0]}-private-subnet-${local.name}"
-      
+
     }
     az2 = {
       Name = "${data.aws_availability_zones.available.names[1]}-private-subnet-${local.name}"
@@ -46,7 +46,7 @@ module "vpc" {
   public_subnet_tags_per_az = {
     az1 = {
       Name = "${data.aws_availability_zones.available.names[0]}-public-subnet-${local.name}"
-      
+
     }
     az2 = {
       Name = "${data.aws_availability_zones.available.names[1]}-public-subnet-${local.name}"
