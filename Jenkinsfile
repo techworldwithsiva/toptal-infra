@@ -31,9 +31,11 @@ pipeline {
             }
             steps {
                 script{
-                sh ""
-                    terraform apply -auto-approve
-                ""
+                withAWS(credentials: 'aws-auth', region: "ap-south-1") {
+                        sh """
+                         terraform apply -auto-approve
+                        """
+                    }
                 }
             }
         }
