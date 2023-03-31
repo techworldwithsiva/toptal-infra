@@ -8,6 +8,7 @@ resource "aws_ssm_parameter" "vpc_id" {
 
 resource "aws_ssm_parameter" "private_subnets" {
   name        = "/toptal/vpc/private_subnets"
+  type = StringList
   value       = join(",",local.private_subnets)
   tags = local.tags
 }
