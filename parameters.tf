@@ -48,7 +48,7 @@ resource "aws_ssm_parameter" "rds_endpoint" {
 }
 
 resource "aws_ssm_parameter" "ecs_cluster_id" {
-  name        = "/toptal/rds/ecs_cluster_id"
+  name        = "/toptal/ecs/ecs_cluster_id"
   type        = "String"
   value       = local.ecs_cluster_id
   tags = local.tags
