@@ -30,9 +30,11 @@ pipeline {
                 ok "Yes, we should."
             }
             steps {
+                script{
                 sh ""
                     terraform apply -auto-approve
                 ""
+                }
             }
         }
   
