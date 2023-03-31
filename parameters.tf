@@ -64,6 +64,6 @@ resource "aws_ssm_parameter" "api_target_group_arn" {
 resource "aws_ssm_parameter" "web_target_group_arn" {
   name        = "/toptal/alb/web_target_group_arn"
   type        = "String"
-  value       = local.api_target_group_arn
+  value       = local.web_target_group_arn
   tags = local.tags
 }
