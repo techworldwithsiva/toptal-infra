@@ -15,7 +15,7 @@ pipeline {
     stage('Terraform Plan'){
             steps{
                 script{
-                    withAWS(credentials: 'aws-auth', region: "${REGION}") {
+                    withAWS(credentials: 'aws-auth', region: "ap-south-1") {
                         sh """
                          terraform init
                          terraform plan
