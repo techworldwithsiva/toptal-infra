@@ -7,14 +7,7 @@ module "rds-sg" {
     vpc_id      = local.vpc_id
     use_name_prefix = false
     ingress_with_source_security_group_id  = [
-        /* {
-        from_port   = 5432
-        to_port     = 5432
-        protocol    = "-1"
-        description = "Allow 5432 from EKS nodes"
-        cidr_blocks  = "0.0.0.0/0"
-        source_security_group_id = local.node_security_group_id
-        } */
+    
     ]
     egress_with_cidr_blocks = [
         {

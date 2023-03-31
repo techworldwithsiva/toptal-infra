@@ -3,24 +3,36 @@ pipeline {
   
   stages {
     stage('Clone') {
-      script{
-                echo "Clone started"
-                gitInfo = checkout scm
-                        
+        steps{
+        script{
+                    echo "Clone started"
+                    gitInfo = checkout scm
+                            
+        }
       }
     }
 
-    stage('Terraform'){
+    stage('Terraform Plan'){
             steps{
                 script{
                     withAWS(credentials: 'aws-auth', region: "${REGION}") {
                         sh """
                          terraform init
                          terraform plan
-                         terraform apply -auto-approve
                         """
                     }
                 }
+            }
+        }
+    stage('Terraform Apply') {
+            input {
+                message "Should we continue?"
+                ok "Yes, we should."
+            }
+            steps {
+                sh ""
+                    terraform apply -auto-approve
+                ""
             }
         }
   

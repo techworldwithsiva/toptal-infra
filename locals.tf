@@ -13,13 +13,9 @@ locals {
 locals{
     vpc_id = module.vpc.vpc_id
     public_subnets = module.vpc.public_subnets
-    # public_subnet_id_azA = split(",", module.vpc.public_subnets.value)[0]
-    # public_subnet_id_azB = split(",", module.vpc.public_subnets.value)[1]
     private_subnets = module.vpc.private_subnets
     database_subnet_group_name = module.vpc.database_subnet_group_name
     rds_security_group_id = module.rds-sg.security_group_id
-    /* eks_managed_node_groups_autoscaling_group_names = module.eks.eks_managed_node_groups_autoscaling_group_names
-    node_security_group_id = module.eks.node_security_group_id */
     api_security_group_id = module.alb-api-sg.security_group_id
     web_security_group_id = module.alb-web-sg.security_group_id
     acm_certificate_arn=module.acm.acm_certificate_arn
