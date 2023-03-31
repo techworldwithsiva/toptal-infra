@@ -6,12 +6,12 @@ resource "aws_ssm_parameter" "vpc_id" {
   tags = local.tags
 }
 
-# resource "aws_ssm_parameter" "private_subnets" {
-#   name        = "/toptal/vpc/private_subnets"
-#   type = StringList
-#   value       = join(",", local.private_subnet_ids)
-#   tags = local.tags
-# }
+resource "aws_ssm_parameter" "private_subnets" {
+  name        = "/toptal/vpc/private_subnets"
+  type = "StringList"
+  value       = join(",", local.private_subnets)
+  tags = local.tags
+}
 resource "aws_ssm_parameter" "api_alb_security_group_id" {
   name        = "/toptal/api-alb/security_group_id"
   type        = "String"

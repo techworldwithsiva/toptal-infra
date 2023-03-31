@@ -51,12 +51,3 @@ locals {
 
 data "aws_availability_zones" "available" {}
 
-output "rds_endpoint" {
-  value = local.rds_endpoint
-}
-
-output "private_subnets" {
-  value = try(type(local.private_subnets), "unknown")
-}
-
-
