@@ -5,7 +5,13 @@ resource "aws_ssm_parameter" "vpc_id" {
   value       = local.vpc_id
   tags = local.tags
 }
-  
+
+resource "aws_ssm_parameter" "private_subnets" {
+  name        = "/toptal/vpc/private_subnets"
+  type        = "StringList"
+  value       = local.private_subnets
+  tags = local.tags
+}
 resource "aws_ssm_parameter" "api_alb_security_group_id" {
   name        = "/toptal/api-alb/security_group_id"
   type        = "String"
@@ -50,6 +56,13 @@ resource "aws_ssm_parameter" "ecs_cluster_id" {
 
 resource "aws_ssm_parameter" "api_target_group_arn" {
   name        = "/toptal/alb/api_target_group_arn"
+  type        = "String"
+  value       = local.api_target_group_arn
+  tags = local.tags
+}
+
+resource "aws_ssm_parameter" "web_target_group_arn" {
+  name        = "/toptal/alb/web_target_group_arn"
   type        = "String"
   value       = local.api_target_group_arn
   tags = local.tags
