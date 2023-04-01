@@ -19,6 +19,7 @@ locals {
   api_security_group_id      = module.alb-api-sg.security_group_id
   web_security_group_id      = module.alb-web-sg.security_group_id
   acm_certificate_arn        = module.acm.acm_certificate_arn
+  cdn_certificate_arn = module.web_alb_cdn.acm_certificate_arn
   api_alb_dns_name           = module.alb-api.lb_dns_name
   web_alb_dns_name           = module.alb-web.lb_dns_name
   api_alb_zone_id            = module.alb-api.lb_zone_id
@@ -28,7 +29,9 @@ locals {
   ecs_cluster_id             = module.ecs.cluster_id
   api_target_group_arn       = join(",", module.alb-api.target_group_arns)
   web_target_group_arn = join(",", module.alb-web.target_group_arns)
-
+  cloudfront_distribution_domain_name  = module.cdn.cloudfront_distribution_domain_name
+  cloudfront_distribution_hosted_zone_id = module.cdn.cloudfront_distribution_hosted_zone_id
+  web_alb_fqdn = "${var.record_name_web_alb_cdn}.${var.zone_name}"
 }
 
   

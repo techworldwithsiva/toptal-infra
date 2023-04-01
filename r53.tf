@@ -30,3 +30,20 @@ module "alb-web-r53" {
   ]
 
 }
+
+module "alb_cdn_r53" {
+  source  = "terraform-aws-modules/route53/aws//modules/records"
+
+  zone_name = var.zone_name
+  records = [
+    {
+      name    = var.record_name_web_alb_cdn
+      type    = "A"
+      alias   = {
+        name    = local.cloudfront_distribution_domain_name
+        zone_id = local.cloudfront_distribution_hosted_zone_id
+      }
+    }
+  ]
+  
+}

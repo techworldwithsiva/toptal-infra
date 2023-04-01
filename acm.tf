@@ -14,3 +14,21 @@ module "acm" {
     Name = "techietrainers.com"
   })
 }
+
+module "web_alb_cdn" {
+  source  = "terraform-aws-modules/acm/aws"
+
+  domain_name  = local.web_alb_fqdn
+  zone_id      = var.zone_id
+
+  subject_alternative_names = [local.web_alb_fqdn]
+
+  wait_for_validation = true
+
+  tags = merge(local.tags, {
+    Name  = "web-cdn"
+  })
+  providers = {
+    aws = aws.us-east-1-cdn
+  }
+}

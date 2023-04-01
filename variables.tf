@@ -40,6 +40,10 @@ variable "zone_name" {
   default = "techietrainers.com"
 }
 
+variable "zone_id" {
+  type = string
+  default = "Z069840220Z2G1MXQRMAA"
+}
 variable "record_name_api" {
   type    = string
   default = "api"
@@ -48,4 +52,9 @@ variable "record_name_api" {
 variable "record_name_web" {
   type    = string
   default = "web"
+}
+
+variable "record_name_web_alb_cdn" {
+  type = string
+  default = "web-cdn"
 }
