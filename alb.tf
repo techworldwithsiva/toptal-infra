@@ -6,7 +6,7 @@ module "alb-api" {
   vpc_id             = local.vpc_id
   subnets            = local.public_subnets
   security_groups    = ([local.api_security_group_id])
-
+  create_security_group = false
   target_groups = [
     {
       name_prefix          = "api-"
@@ -29,19 +29,6 @@ module "alb-api" {
     Name = "toptal-api-alb"
   })
 
-  http_tcp_listeners = [
-    {
-      port        = 80
-      protocol    = "HTTP"
-      action_type = "fixed-response"
-      fixed_response = {
-        content_type = "text/plain"
-        message_body = "Fixed message"
-        status_code  = "200"
-      }
-    }
-  ]
-
   https_listeners = [
     {
       port               = 443
@@ -62,7 +49,7 @@ module "alb-web" {
   vpc_id             = local.vpc_id
   subnets            = local.public_subnets
   security_groups    = ([local.web_security_group_id])
-
+  create_security_group = false
   target_groups = [
     {
       name_prefix          = "web-"
@@ -89,12 +76,7 @@ module "alb-web" {
     {
       port        = 80
       protocol    = "HTTP"
-      action_type = "fixed-response"
-      fixed_response = {
-        content_type = "text/plain"
-        message_body = "Fixed message"
-        status_code  = "200"
-      }
+      target_group_index = 0
     }
   ]
 

@@ -31,7 +31,7 @@ locals {
   web_target_group_arn = join(",", module.alb-web.target_group_arns)
   cloudfront_distribution_domain_name  = module.cdn.cloudfront_distribution_domain_name
   cloudfront_distribution_hosted_zone_id = module.cdn.cloudfront_distribution_hosted_zone_id
-  web_alb_fqdn = "${var.record_name_web_alb_cdn}.${var.zone_name}"
+  web_alb_cdn_fqdn = "${var.record_name_web_alb_cdn}.${var.zone_name}"
 }
 
   
@@ -53,4 +53,19 @@ locals {
 } */
 
 data "aws_availability_zones" "available" {}
+# data "aws_ip_ranges" "cloudfront" {
+#   services = ["cloudfront"]
+# }
 
+# data "http" "cloudfront_ips" {
+#   url = "https://d7uri8nf7uskq.cloudfront.net/tools/list-cloudfront-ips"
+# }
+
+# locals {
+#   cloudfront_ips = data.http.cloudfront_ips
+  
+# }
+
+# output "cloudfront_ip" {
+#   value = local.cloudfront_ips
+# }

@@ -4,6 +4,10 @@ terraform {
       source  = "hashicorp/aws"
       version = "4.60.0"
     }
+    http = {
+      source = "hashicorp/http"
+      version = "~> 2.1"
+    }
   }
 
   backend "s3" {
@@ -20,5 +24,8 @@ provider "aws" {
 
 provider "aws" {
   region = "us-east-1"
-  alias = "us-east-1-cdn"
+  alias =   "us-east-1-cdn"
+}
+
+provider "http" {
 }

@@ -20,16 +20,56 @@ module "rds-sg" {
     },
   ]
   tags = merge(local.tags, {
-    Name = "toptal-student-rds"
+    Name = "toptal-rds"
   })
 }
 
 module "alb-api-sg" {
   source          = "terraform-aws-modules/security-group/aws"
-  name            = "node-api-alb"
+  name            = "toptal-api-alb"
   description     = "Security group which is used to attach to API ALB"
   vpc_id          = local.vpc_id
   use_name_prefix = false
+  
+  ingress_with_cidr_blocks = [
+    {
+      from_port   = 443
+      to_port     = 443
+      protocol    = 6
+      description = "Allow 443 from internet"
+      cidr_blocks = "0.0.0.0/0"
+    }
+  ]
+ 
+  egress_with_cidr_blocks = [
+    {
+      from_port   = 0
+      to_port     = 0
+      protocol    = "-1"
+      description = "Allow all outbound"
+      cidr_blocks = "0.0.0.0/0"
+    },
+  ]
+  tags = merge(local.tags, {
+    Name = "toptal-api-alb"
+  })
+}
+
+module "alb-web-sg" {
+  source          = "terraform-aws-modules/security-group/aws"
+  name            = "toptal-web-alb"
+  description     = "Security group which is used to attach to Web ALB"
+  vpc_id          = local.vpc_id
+  use_name_prefix = false
+  #ingress_cidr_blocks = local.cloudfront_ips
+  # ingress_rules = [
+  #   {
+  #     description = "HTTP traffic from CloudFront"
+  #     from_port   = 80
+  #     to_port     = 80
+  #     protocol    = "tcp"
+  #   }
+  # ]
   ingress_with_cidr_blocks = [
     {
       from_port   = 443
@@ -42,7 +82,7 @@ module "alb-api-sg" {
       from_port   = 80
       to_port     = 80
       protocol    = 6
-      description = "Allow 80 from internet"
+      description = "Allow 443 from internet"
       cidr_blocks = "0.0.0.0/0"
     }
   ]
@@ -56,36 +96,7 @@ module "alb-api-sg" {
     },
   ]
   tags = merge(local.tags, {
-    Name = "node-api-alb"
-  })
-}
-
-module "alb-web-sg" {
-  source          = "terraform-aws-modules/security-group/aws"
-  name            = "node-web-alb"
-  description     = "Security group which is used to attach to Web ALB"
-  vpc_id          = local.vpc_id
-  use_name_prefix = false
-  ingress_with_cidr_blocks = [
-    {
-      from_port   = 443
-      to_port     = 443
-      protocol    = 6
-      description = "Allow 443 from internet"
-      cidr_blocks = "0.0.0.0/0"
-    },
-  ]
-  egress_with_cidr_blocks = [
-    {
-      from_port   = 0
-      to_port     = 0
-      protocol    = "-1"
-      description = "Allow all outbound"
-      cidr_blocks = "0.0.0.0/0"
-    },
-  ]
-  tags = merge(local.tags, {
-    Name = "node-web-alb"
+    Name = "toptal-web-alb"
   })
 }
 

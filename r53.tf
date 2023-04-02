@@ -45,5 +45,4 @@ module "alb_cdn_r53" {
       }
     }
   ]
-  
 }
