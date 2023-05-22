@@ -17,7 +17,7 @@ pipeline {
                 script{
                     withAWS(credentials: 'aws-auth', region: "ap-south-1") {
                         sh """
-                         terraform init
+                         terraform init -upgrade
                          terraform plan
                         """
                     }
