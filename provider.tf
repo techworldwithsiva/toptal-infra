@@ -22,5 +22,3 @@ provider "aws" {
   alias =   "us-east-1-cdn"
 }
 
-provider "http" {
-}
