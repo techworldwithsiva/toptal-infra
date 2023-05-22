@@ -69,7 +69,7 @@ module "alb-web" {
     }
   ]
   target_group_tags = merge(local.tags, {
-    Name = "toptal-api-web"
+    Name = "toptal-web"
   })
 
   http_tcp_listeners = [

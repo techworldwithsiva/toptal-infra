@@ -11,10 +11,10 @@ terraform {
   }
 
   backend "s3" {
-    bucket         = "siva-terraform-state"
-    key            = "totpal"
-    region         = "ap-south-1"
-    dynamodb_table = "terraform-state"
+    bucket = "timing-backend-s3"
+    key    = "vpc"
+    region = "ap-south-1"
+    dynamodb_table = "timing-lock"
   }
 }
 
