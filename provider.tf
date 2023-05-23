@@ -7,7 +7,7 @@ terraform {
 
   backend "s3" {
     bucket = "timing-backend-s3"
-    key    = "vpc"
+    key    = "vpc1"
     region = "ap-south-1"
     dynamodb_table = "timing-lock"
   }
